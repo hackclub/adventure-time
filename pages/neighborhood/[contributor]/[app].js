@@ -277,7 +277,7 @@ export default function AppPage() {
                           if (match) {
                             const repo = match[2];
                             return (
-                              <span> (<a href={`https://github.com/${project.githubUsername}/${repo}/commits/main/?author=${project.githubUsername}`} target="_blank" rel="noopener noreferrer">Github Commits by @{project.githubUsername}</a>)</span>
+                              <span> (<a href={`https://github.com/${project.githubUsername}/${repo}/commits/?author=${project.githubUsername}`} target="_blank" rel="noopener noreferrer">Github Commits by @{project.githubUsername}</a>)</span>
                             );
                           }
                           // fallback to just githubLink
