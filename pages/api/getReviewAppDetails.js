@@ -20,6 +20,11 @@ export default async function handler(req, res) {
     if (!record) {
       return res.status(404).json({ message: 'ReviewAssignment not found' });
     }
+    const safeFields = Object.fromEntries(
+      Object.entries(record.fields).filter(
+        ([key]) => !["reviewerEmail", "reviewedNeighborEmail"].includes(key)
+      )
+    )
     res.status(200).json({
       contributor: Array.isArray(record.fields.reviewedNeighborSlackHandle)
         ? record.fields.reviewedNeighborSlackHandle[0]
