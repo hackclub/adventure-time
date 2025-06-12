@@ -293,10 +293,11 @@ export default function AppPage() {
                         (() => {
                           // Try to extract repo from githubLink
                           const match = project.githubLink.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+                          const repoUsername = match[1];
                           if (match) {
                             const repo = match[2];
                             return (
-                              <span> (<a href={`https://github.com/${project.githubUsername}/${repo}/commits/?author=${project.githubUsername}`} target="_blank" rel="noopener noreferrer">Github Commits by @{project.githubUsername}</a>)</span>
+                              <span> (<a href={`https://github.com/${repoUsername}/${repo}/commits/?author=${project.githubUsername}`} target="_blank" rel="noopener noreferrer">Github Commits by @{project.githubUsername}</a>)</span>
                             );
                           }
                           // fallback to just githubLink
