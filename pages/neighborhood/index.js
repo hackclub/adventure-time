@@ -16,7 +16,6 @@ export default function Neighborhood() {
       try {
         const response = await fetch(`/api/getNeighborsSecurely?showOnlyApprovedFlights=${showOnlyApprovedFlights}&showOnlyNoFeedback=${showOnlyNoFeedback}`);
         const data = await response.json();
-        // Filter out neighbors without names or Slack handles
         const filteredNeighbors = data.neighbors.filter(
           neighbor => neighbor.fullName || neighbor.slackFullName
         );
@@ -108,7 +107,7 @@ export default function Neighborhood() {
                 <Link href={`/neighborhood/${neighbor.slackId}`}>
                   {neighbor.fullName || neighbor.slackFullName || neighbor.slackId || "unnamed"}
                 </Link>
-                {" "}({neighbor.totalTimeHackatimeHours}hr logged)
+                {" "}({neighbor.totalTimeCombinedHours}hr logged)
                 <span> ({(neighbor.totalCheckedTime).toFixed(1)}hr checked)</span>
                 {neighbor.approvedFlightStipend && neighbor.moveInDate && ` (✈️ to SFO ${new Date(neighbor.moveInDate).toLocaleDateString()})`}
                 {neighbor.gaveFeedback && " (💬 received admin feedback)"}
@@ -120,4 +119,4 @@ export default function Neighborhood() {
       </div>
     </>
   );
-} 
+}
