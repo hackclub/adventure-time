@@ -16,6 +16,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: "Missing slackId or appId" });
   }
 
+  const nameRegex = /^[\w\s\-().,:;?!'"&+]{1,100}$/;
+
+  if (!nameRegex.test(appId)) {
+    return res.status(400).json({ message: "Invalid app name format" });
+  }
+
   try {
     // First verify the neighbor exists and get their ID
     const neighborRecords = await base("Neighbors")
@@ -30,9 +36,6 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: "Neighbor not found" });
     }
 
-    const neighborId = neighborRecords[0].id;
-    const cleanedAppName = cleanString(appId);
-
     // Get the app details by Name (case-insensitive, trimmed)
     let appRecords = await base("Apps")
       .select({
@@ -46,7 +49,7 @@ export default async function handler(req, res) {
           "YSWS Project Submission",
           "playableURL"
         ],
-        filterByFormula: `LOWER({Name}) = '${cleanedAppName.toLowerCase()}'`,
+        filterByFormula: `LOWER({Name}) = '${appId.toLowerCase()}'`,
         maxRecords: 1
       })
       .firstPage();
@@ -65,7 +68,7 @@ export default async function handler(req, res) {
             "YSWS Project Submission",
             "playableURL"
           ],
-          filterByFormula: `SEARCH('${cleanedAppName.toLowerCase()}', LOWER({Name}))`,
+          filterByFormula: `SEARCH('${appId.toLowerCase()}', LOWER({Name}))`,
           maxRecords: 1
         })
         .firstPage();

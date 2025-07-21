@@ -37,7 +37,7 @@ const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los
     // For each in-person neighbor, get their commits for this week
     for (const neighbor of neighborRecords) {
       const slackId = neighbor.fields["Slack ID (from slackNeighbor)"];
-      if (!slackId) continue;
+      if (!slackId || typeof slackId !== "string") continue;
       
       // Fetch commits for this user within the date range
       const commitRecords = await base('Commits').select({
@@ -73,7 +73,7 @@ const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los
       
       // Calculate total minutes
       const totalMinutes = commits.reduce((total, commit) => total + commit.duration, 0);
-      
+
       // Store in our map
       commitsByUser[slackId] = {
         slackId,

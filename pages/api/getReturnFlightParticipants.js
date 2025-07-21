@@ -1,3 +1,4 @@
+/*
 import Airtable from "airtable";
 
 // Get the API key from our utility function
@@ -101,3 +102,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ message: "Error fetching return flight participants" });
   }
 } 
+*/

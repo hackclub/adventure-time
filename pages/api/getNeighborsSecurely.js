@@ -52,6 +52,7 @@ export default async function handler(req, res) {
       pfp: record.fields["Pfp (from slackNeighbor)"]?.[0]?.url || null,
       slackId: record.fields["Slack ID (from slackNeighbor)"] || null,
       slackHandle: record.fields["Slack Handle (from slackNeighbor)"] || null,
+      fullName: record.fields["Slack Handle (from slackNeighbor)"]?.[0] || null,
       githubUsername: record.fields.githubUsername || null,
       totalTimeCombinedHours: record.fields.totalTimeCombinedHours || 0,
       totalTimeHackatimeHours: Math.round(record.fields.totalTimeHackatimeHours || 0),

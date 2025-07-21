@@ -15,8 +15,9 @@ export default function StarChart() {
         const response = await fetch(`/api/getNeighborsSecurely`);
         const data = await response.json();
         // Filter out neighbors without names/Slack handles and those with no star rating
+        // NOTE: slackFullName was never going to work, anyway
         const filteredNeighbors = data.neighbors.filter(
-          neighbor => (neighbor.fullName || neighbor.slackFullName) && neighbor.starAvg > 0
+          neighbor => (neighbor.fullName) && neighbor.starAvg > 0
         );
         setNeighbors(filteredNeighbors);
       } catch (err) {
