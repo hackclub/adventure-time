@@ -13,7 +13,7 @@
     "@react-three/fiber": "^9.1.2",
     "@react-three/postprocessing": "^3.0.4",
     "airtable": "^0.12.2",
-    "next": "15.3.8",
+    "next": "15.5.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "^0.176.0"
